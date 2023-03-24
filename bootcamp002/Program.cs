@@ -2,13 +2,13 @@
 
 Console.Clear();
 
-int[] array = 1_000_000.Create()
+int[] array = 1_000_000.Create()  // Создание массива из  1_000_000 элементов
                 .Fill(1, 10);
 // array.ConvertToStringAndPrintToTerminal();
 
 
 
-int m = 100;   // Количесто чисел последовательности
+int m = 100;   // Количесто чисел последовательности для суммы
 Stopwatch sw = new Stopwatch();
 sw.Start();
 
