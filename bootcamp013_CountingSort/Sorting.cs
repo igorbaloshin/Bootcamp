@@ -1,27 +1,32 @@
 public static class Sorting
 {
-  public static int[] SortQuick(this int[] collection, int left, int right)
-  {
-    int i = left;
-    int j = right;
-
-    int pivot = collection[Random.Shared.Next(left, right)];
-    while (i <= j)
+    public static int[] SortCounting(this int[] collection)
     {
-      while (collection[i] < pivot) i++;
-      while (collection[j] > pivot) j--;
+        int size = collection.Length;
 
-      if (i <= j)
-      {
-        int t = collection[i];
-        collection[i] = collection[j];
-        collection[j] = t;
-        i++;
-        j--;
-      }
+        int max = collection[0];
+        for (int i = 1; i < size; i++)
+            if (collection[i] > max) max = collection[i];
+
+        int min = collection[0];
+        for (int i = 1; i < size; i++)
+            if (collection[i] < min) min = collection[i];
+        
+        Console.WriteLine(min);
+        Console.WriteLine(max);
+
+        int ofset = - min;
+
+        int[] counter = new int[max + 1 + ofset];
+
+        for (int i = 0; i < size; i++)
+            counter[collection[i] + ofset]++;
+        Console.WriteLine($"counter = [{String.Join(' ', counter)}]");
+        int index = 0;
+        for (int i = 0; i < max + 1 + ofset; i++)
+            for (int j = 0; j < counter[i]; j++)
+                collection[index++] = i - ofset;
+
+        return collection;
     }
-    if (i < right) SortQuick(collection, i, right);
-    if (left < j) SortQuick(collection, left, j);
-    return collection;
-  }
 }
